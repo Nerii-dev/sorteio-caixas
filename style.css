@@ -15,7 +15,7 @@ body {
     align-items: center;
     min-height: 100vh;
     overflow: hidden;
-    padding: 20px; /* Adiciona um padding para evitar que o conteúdo encoste nas bordas */
+    padding: 20px;
 }
 
 /* Vídeo de fundo */
@@ -37,7 +37,7 @@ body {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     z-index: 1;
     width: 100%;
-    max-width: 800px; /* Limita a largura máxima do container */
+    max-width: 800px;
 }
 
 /* Título */
@@ -57,12 +57,12 @@ h2 {
     justify-content: center;
     gap: 10px;
     margin-top: 20px;
-    flex-wrap: wrap; /* Permite que as caixas quebrem para a próxima linha em telas pequenas */
+    flex-wrap: wrap;
 }
 
 /* Estilo das caixas */
 .caixa {
-    width: 150px; /* Tamanho menor para telas pequenas */
+    width: 150px;
     height: 120px;
     cursor: pointer;
     transition: transform 0.3s ease;
@@ -148,6 +148,13 @@ h2 {
     background-color: #e64a19;
 }
 
+/* Efeito de carregamento */
+#carregando {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: #fff;
+}
+
 /* Media Queries para Telas Pequenas (Mobile) */
 @media (max-width: 600px) {
     h1 {
@@ -159,7 +166,7 @@ h2 {
     }
 
     .caixa {
-        width: 100px; /* Tamanho menor para telas muito pequenas */
+        width: 100px;
         height: 80px;
     }
 

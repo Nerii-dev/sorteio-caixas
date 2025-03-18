@@ -74,14 +74,30 @@ function sortearValor(caixa) {
 // Função para resetar os limites
 function resetarLimites() {
     if (confirm("Tem certeza que deseja resetar os limites de premiação?")) {
-        for (const cor in limitesPremiacao) {
-            for (const valor in limitesPremiacao[cor]) {
-                if (limitesPremiacao[cor][valor] !== Infinity) {
-                    limitesPremiacao[cor][valor] = valoresPorCaixa[cor].find(item => item.valor === Number(valor)).probabilidade;
+        // Exibe o carregamento
+        const carregando = document.getElementById("carregando");
+        carregando.style.display = "block";
+
+        // Limpa o resultado da premiação
+        document.getElementById("resultado").textContent = "";
+
+        // Simula um tempo de carregamento (2 segundos)
+        setTimeout(() => {
+            // Reseta os limites
+            for (const cor in limitesPremiacao) {
+                for (const valor in limitesPremiacao[cor]) {
+                    if (limitesPremiacao[cor][valor] !== Infinity) {
+                        limitesPremiacao[cor][valor] = valoresPorCaixa[cor].find(item => item.valor === Number(valor)).probabilidade;
+                    }
                 }
             }
-        }
-        alert("Limites resetados com sucesso!");
+
+            // Oculta o carregamento
+            carregando.style.display = "none";
+
+            // Exibe uma mensagem de sucesso
+            alert("Limites resetados com sucesso!");
+        }, 2000); // Tempo de carregamento simulado
     }
 }
 
@@ -158,8 +174,4 @@ document.querySelectorAll(".caixa").forEach(caixa => {
                 });
 
                 // Libera para um novo sorteio
-                sorteioEmAndamento = false;
-            }, 2000);
-        }, 1000); // Tempo para a animação de abertura terminar
-    });
-});
+                sorteio
