@@ -32,6 +32,9 @@ const limitesPremiacao = {
     }
 };
 
+// Variável para controlar se um sorteio está em andamento
+let sorteioEmAndamento = false;
+
 // Função para sortear um valor com limites e probabilidades
 function sortearValor(caixa) {
     const valores = valoresPorCaixa[caixa];
@@ -94,17 +97,20 @@ function dispararConfete() {
 // Evento de clique no botão de resetar limites
 document.getElementById("resetar-limites").addEventListener("click", resetarLimites);
 
-// Variável para controlar se um sorteio está em andamento
-let sorteioEmAndamento = false;
-
 // Evento de clique em cada caixa
 document.querySelectorAll(".caixa").forEach(caixa => {
     caixa.addEventListener("click", () => {
+        // Verifica se já há um sorteio em andamento
+        if (sorteioEmAndamento) return;
+        sorteioEmAndamento = true;
+
         // Limpa a mensagem anterior
         document.getElementById("resultado").textContent = "";
 
-        // Desabilita o clique durante a animação
-        caixa.style.pointerEvents = "none";
+        // Desabilita o clique em todas as caixas
+        document.querySelectorAll(".caixa").forEach(c => {
+            c.style.pointerEvents = "none";
+        });
 
         // Tocar som de abertura
         const somAbertura = document.getElementById("som-abertura");
@@ -145,7 +151,14 @@ document.querySelectorAll(".caixa").forEach(caixa => {
             setTimeout(() => {
                 caixa.classList.remove("abrindo", "aberta");
                 fumaca.style.display = "none";
-                caixa.style.pointerEvents = "auto"; // Reabilita o clique
+
+                // Reabilita o clique em todas as caixas
+                document.querySelectorAll(".caixa").forEach(c => {
+                    c.style.pointerEvents = "auto";
+                });
+
+                // Libera para um novo sorteio
+                sorteioEmAndamento = false;
             }, 2000);
         }, 1000); // Tempo para a animação de abertura terminar
     });
