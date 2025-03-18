@@ -15,22 +15,15 @@ const valoresPorCaixa = {
     ]
 };
 
-// Controle de limites de premiação
-const limitesPremiacao = {
-    azul: {
-        30: 23, // R$ 30 pode ser sorteado 23 vezes
-        40: 7
-    },
-    amarelo: {
-        50: 20,
-        70: 8,
-        100: 2
-    },
-    verde: {
-        10: 23,
-        20: 7
-    }
+// Limites iniciais de premiação
+const limitesIniciais = {
+    azul: { 30: 23, 40: 7 },
+    amarelo: { 50: 20, 70: 8, 100: 2 },
+    verde: { 10: 23, 20: 7 }
 };
+
+// Controle de limites de premiação
+let limitesPremiacao = JSON.parse(JSON.stringify(limitesIniciais)); // Deep copy
 
 // Variável para controlar se um sorteio está em andamento
 let sorteioEmAndamento = false;
@@ -84,13 +77,7 @@ function resetarLimites() {
         // Simula um tempo de carregamento (2 segundos)
         setTimeout(() => {
             // Reseta os limites
-            for (const cor in limitesPremiacao) {
-                for (const valor in limitesPremiacao[cor]) {
-                    if (limitesPremiacao[cor][valor] !== Infinity) {
-                        limitesPremiacao[cor][valor] = valoresPorCaixa[cor].find(item => item.valor === Number(valor)).probabilidade;
-                    }
-                }
-            }
+            Object.assign(limitesPremiacao, JSON.parse(JSON.stringify(limitesIniciais)));
 
             // Oculta o carregamento
             carregando.style.display = "none";
@@ -141,6 +128,7 @@ document.querySelectorAll(".caixa").forEach(caixa => {
         // Efeito de fumaça
         const fumaca = document.getElementById("fumaca");
         fumaca.style.display = "block";
+        fumaca.classList.add("ativa");
 
         // Sortear um valor após a animação
         setTimeout(() => {
@@ -149,6 +137,8 @@ document.querySelectorAll(".caixa").forEach(caixa => {
 
             if (resultadoSorteio === null) {
                 document.getElementById("resultado").textContent = "Não há mais prêmios disponíveis nesta caixa.";
+                caixa.style.opacity = "0.5";
+                caixa.style.pointerEvents = "none";
             } else if (resultadoSorteio.limiteAtingido) {
                 document.getElementById("resultado").textContent = `O valor R$ ${resultadoSorteio.valor.toFixed(2)} atingiu o limite de sorteios.`;
             } else {
@@ -167,6 +157,7 @@ document.querySelectorAll(".caixa").forEach(caixa => {
             setTimeout(() => {
                 caixa.classList.remove("abrindo", "aberta");
                 fumaca.style.display = "none";
+                fumaca.classList.remove("ativa");
 
                 // Reabilita o clique em todas as caixas
                 document.querySelectorAll(".caixa").forEach(c => {
@@ -174,4 +165,8 @@ document.querySelectorAll(".caixa").forEach(caixa => {
                 });
 
                 // Libera para um novo sorteio
-                sorteio
+                sorteioEmAndamento = false;
+            }, 2000); // Tempo de animação
+        }, 1000); // Tempo de espera para o sorteio
+    });
+});

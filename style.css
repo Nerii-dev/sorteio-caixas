@@ -103,6 +103,12 @@ h2 {
     100% { opacity: 0; transform: scale(2); }
 }
 
+@keyframes carregando {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
 .caixa.aberta {
     animation: brilho 1.5s infinite;
 }
@@ -131,6 +137,17 @@ h2 {
     display: none;
 }
 
+#fumaca.ativa {
+    display: block;
+}
+
+#carregando {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: #fff;
+    animation: carregando 1.5s infinite;
+}
+
 /* Estilo do botão de resetar limites */
 #resetar-limites {
     margin-top: 20px;
@@ -146,13 +163,6 @@ h2 {
 
 #resetar-limites:hover {
     background-color: #e64a19;
-}
-
-/* Efeito de carregamento */
-#carregando {
-    margin-top: 20px;
-    font-size: 1.2rem;
-    color: #fff;
 }
 
 /* Media Queries para Telas Pequenas (Mobile) */
