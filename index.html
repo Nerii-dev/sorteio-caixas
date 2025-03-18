@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PREMIAÇÃO DA SEMANA</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Vídeo de fundo -->
+    <video autoplay muted loop id="video-fundo">
+        <source src="videos/fundo.mp4" type="video/mp4">
+        Seu navegador não suporta vídeos HTML5.
+    </video>
+
+    <!-- Conteúdo principal -->
+    <div class="container">
+        <header>
+            <h1>PREMIAÇÃO DA SEMANA</h1>
+            <h2>Escolha uma caixa de acordo com a sua premiação</h2>
+        </header>
+        <div class="caixas">
+            <div class="caixa" id="caixa-azul" data-cor="azul">
+                <img src="images/caixa_azul.avif" alt="Caixa Azul">
+            </div>
+            <div class="caixa" id="caixa-amarela" data-cor="amarelo">
+                <img src="images/caixa_amarela.avif" alt="Caixa Amarela">
+            </div>
+            <div class="caixa" id="caixa-verde" data-cor="verde">
+                <img src="images/caixa_verde.avif" alt="Caixa Verde">
+            </div>
+        </div>
+        <div id="resultado"></div>
+
+        <!-- Botão para resetar limites -->
+        <button id="resetar-limites">Resetar Limites</button>
+    </div>
+
+    <!-- Efeito de fumaça -->
+    <div id="fumaca"></div>
+
+    <!-- Áudios -->
+    <audio id="som-abertura" src="sounds/abertura.mp3"></audio>
+    <audio id="som-revelacao" src="sounds/revelacao.mp3"></audio>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
