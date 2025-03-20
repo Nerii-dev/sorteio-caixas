@@ -1,17 +1,17 @@
 // Valores disponíveis para cada caixa com probabilidades
 const valoresPorCaixa = {
     azul: [
-        { valor: 30, probabilidade: 75 }, // 75% de chance
-        { valor: 40, probabilidade: 25 }, // 25% de chance
+        { valor: 30, probabilidade: 65 }, // 65% de chance
+        { valor: 40, probabilidade: 35 }, // 35% de chance
     ],
     amarelo: [
-        { valor: 50, probabilidade: 50 },
+        { valor: 50, probabilidade: 40 },
         { valor: 70, probabilidade: 40 },
-        { valor: 100, probabilidade: 10 }
+        { valor: 100, probabilidade: 20 }
     ],
     verde: [
-        { valor: 10, probabilidade: 75 },
-        { valor: 20, probabilidade: 25 }
+        { valor: 10, probabilidade: 65 },
+        { valor: 20, probabilidade: 35 }
     ]
 };
 
